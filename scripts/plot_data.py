@@ -12,8 +12,22 @@ opt = parser.parse_args()
 
 log_dir = opt.log_dir
 
+# table_cdf = PrettyTable()
+# table_cdf_ths = [0.01, 0.05, 0.1, 0.2, 0.5, 1.0]
+# table_cdf_th_in = (1, 30)
+# table_cdf.field_names = [
+#     "result_name",
+#     "1m+30deg (%)",
+#     "1cm (%)",
+#     "5cm (%)",
+#     "10cm (%)",
+#     "20cm (%)",
+#     "50cm (%)",
+#     "1m (%)",
+# ]
+
 table_cdf = PrettyTable()
-table_cdf_ths = [0.01, 0.05, 0.1, 0.2, 0.5, 1.0]
+table_cdf_ths = [0.01, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0]
 table_cdf_th_in = (1, 30)
 table_cdf.field_names = [
     "result_name",
@@ -24,6 +38,10 @@ table_cdf.field_names = [
     "20cm (%)",
     "50cm (%)",
     "1m (%)",
+    "2m (%)",
+    "5m (%)",
+    "10m (%)",
+    "20m (%)"
 ]
 
 table_topk = PrettyTable()
@@ -85,6 +103,13 @@ for result_name in result_list:
         recall = (data["topk_terrs"][k] < 1).sum() / data["topk_terrs"][k].size
         row.append(f"{recall*100:.2f}")
     table_topk.add_row(row)
+
+#   # topk
+#   row = [result_name]
+#   for k in table_topk_ks:
+#       recall = (data["topk_terrs"][k] < 3).sum() / data["topk_terrs"][k].size
+#       row.append(f"{recall*100:.2f}")
+#   table_topk.add_row(row)
 
     # median err
     med_terr = np.median(data["terrs"])

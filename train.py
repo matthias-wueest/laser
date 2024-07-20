@@ -139,7 +139,7 @@ if __name__ == "__main__":
             dataset_root = "/mnt/data/zhixiangm/Structured3D"
     else:
         raise "Unknown dataset"
-
+    print(dataset_root)
     model = FpLocNet(cfg).cuda()
     optimizer = torch.optim.Adam(model.parameters())
     global_step = 0
@@ -156,7 +156,7 @@ if __name__ == "__main__":
                 optimizer.load_state_dict(ckpt["optimizer_state_dict"])
                 global_step = ckpt["global_step"]
                 print(f"Model with step={global_step} loaded.")
-
+    print("Before loading train dataloader.")
     dataloader_train = DataLoader(
         _dataset(
             dataset_root,
@@ -171,7 +171,7 @@ if __name__ == "__main__":
         num_workers=8,
         drop_last=True,
     )
-
+    print("Before loading val dataloader.")
     dataloader_val = DataLoader(
         _dataset(
             dataset_root,
@@ -189,7 +189,7 @@ if __name__ == "__main__":
 
     dataloader_vals = {"0": dataloader_val}
     dataloader_vals_it = {"0": iter(dataloader_val)}
-
+    print("Dataloaders loaded.")
     tic()
 
     while opt.its == 0 or global_step < opt.its:
@@ -203,6 +203,7 @@ if __name__ == "__main__":
             )
 
             global_step += 1
+#            print(global_step)
 
             if global_step % 200 == 0:
                 if record_log:

@@ -1,0 +1,1 @@
+{"Q": 100, "Q_refine": 20, "D": 128, "G": 32, "H": 32, "dist_max": 10, "Vr": 64, "V": 16, "disable_semantics": false, "disable_pointnet": false, "fov": [45.0, 135.0], "view_type": "pview"}

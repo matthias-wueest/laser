@@ -42,7 +42,8 @@ n_results = len(terrs)
 print(f"{n_results} results loaded.")
 
 # for rng in [(0,999), (0,0.2), (0.2,0.5), (0.5,1.0), (1.0, 999)]: # use this if you want multiple htmls of results of different accuracies
-for rng in [(0, 999)]:
+for rng in [(0, 0.1), (0.1, 0.2), (0.2, 0.5), (0.5, 1.0), (1.0, 2.0), (2.0, 5.0), (5.0, 999)]: # use this if you want multiple htmls of results of different accuracies
+# for rng in [(0, 999)]:
     n_rows = 0
     table = PrettyTable()
     table.field_names = [
@@ -74,6 +75,11 @@ for rng in [(0, 999)]:
             ]
         )
 
+    #### 29.04.2024
+    import random
+
+    ####
+
     html_str = table.get_html_string()
     html_str = html_str.replace(r"&lt;", r"<")
     html_str = html_str.replace(r"&gt;", r">")
@@ -92,4 +98,4 @@ pdf = pdf / sum(pdf)
 cdf = np.cumsum(pdf)[:20]
 rng = bins[1:-1]
 print(cdf)
-# np.savetxt(os.path.join(result_dir, 'cdf.txt'), np.stack([rng, cdf], axis=1), fmt='%.4f')
+np.savetxt(os.path.join(result_dir, 'cdf.txt'), np.stack([rng, cdf], axis=1), fmt='%.4f')

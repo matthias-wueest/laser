@@ -176,7 +176,12 @@ if __name__ == "__main__":
         mkdir_if_not_exist(os.path.join(save_dir, "raws"))
 
     idx = 0
+    print("idx: ", idx)
     for data in dataloader:
+
+        if idx%100 == 0:
+            print(idx)
+
         if len(data.keys()) == 0:
             idx += 1
             continue
